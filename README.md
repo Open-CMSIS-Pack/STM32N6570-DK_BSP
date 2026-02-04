@@ -1,7 +1,7 @@
 [![Version](https://img.shields.io/github/v/release/Open-CMSIS-Pack/STM32N6570-DK_BSP?label=Release)](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/releases/latest)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-green?label=License)](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/LICENSE-Apache-2.0)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-green?label=License)](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/LICENSE-BSD-3-Clause)
-[![Examples Build Test](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/STM32N6570-DK_BSP/Test-Examples.yml?logo=arm&logoColor=0091bd&label=Examples%20Build%20Test)](./.github/workflows/Test-Examples.yml)
+[![Examples Build Test](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/STM32N6570-DK_BSP/build_examples.yml?logo=arm&logoColor=0091bd&label=Examples%20Build%20Test)](./.github/workflows/build_examples.yml)
 [![Build pack](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/STM32N6570-DK_BSP/pack.yml?logo=arm&logoColor=0091bd&label=Build%20pack)](/.github/workflows/pack.yml)
 
 # STM32N6570-DK_BSP
@@ -19,9 +19,9 @@ Directory                   | Description
 [CMSIS/Driver](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/CMSIS/Driver)             | Contains a [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) that is configured for the board peripherals.
 [Documents](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Documents)                   | [Usage overview](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Documents/OVERVIEW.md) for examples and board documentation provided by STMicroelectronics.
 [Examples/Blinky](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/Blinky)       | Blinky example in *csolution project format* using [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) and [CMSIS-Compiler](https://arm-software.github.io/CMSIS-Compiler/main/index.html) for printf I/O retargeting.
-[Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL)           | FSBL example in *csolution project format* that provides the fsbl basic reference template.
-[Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) | FSBL_LRUN example in *csolution project format* that provides the fsbl load and run reference template.
-[Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP)   | FSBL_XIP example in *csolution project format* that provides the fsbl execute-in-place reference template.
+[Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL)           | FSBL example in *csolution project format* that provides the FSBL basic reference template.
+[Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) | FSBL_LRUN example in *csolution project format* that provides the FSBL load and run reference template.
+[Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP)   | FSBL_XIP example in *csolution project format* that provides the FSBL execute-in-place reference template.
 [Images](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Images)                         | [Pictures](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/Images/stm32n6570-dk_large.png) of the board.
 
 ## Using the development repository
@@ -44,7 +44,7 @@ Run this script locally with:
 The repository uses GitHub Actions to generate the pack and build examples:
 
 - `.github/workflows/pack.yml` based on [Open-CMSIS-Pack/gen-pack-action](https://github.com/Open-CMSIS-Pack/gen-pack-action) generates pack using the [Generate software pack](#generate-software-pack) scripts.
-- `.github/workflows/Test-Examples.yml` test build of examples.
+- `.github/workflows/build_examples.yml` build test of examples.
 
 ## Issues
 
