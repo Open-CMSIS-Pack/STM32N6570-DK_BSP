@@ -14,17 +14,8 @@
   </licenseSets>
 
   <releases>
-    <release version="1.0.0-dev">
+    <release version="1.0.1-dev">
       Active development ...
-      Prepared for new CMSIS-Toolbox CubeMX integration
-      Board description for STM32N6570-DK
-      CMSIS Drivers:
-      - CMSIS-Driver VIO
-      Examples (CMSIS Solution):
-      - Blinky
-      - FSBL
-      - FSBL_LRUN
-      - FSBL_XIP
     </release>
   </releases>
 
