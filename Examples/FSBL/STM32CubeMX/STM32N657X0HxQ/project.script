@@ -1,0 +1,4 @@
+loadboard STM32N6570-DK allmodes
+project name STM32CubeMX
+project toolchain "MDK-ARM V5"
+SetCopyLibrary "copy only"

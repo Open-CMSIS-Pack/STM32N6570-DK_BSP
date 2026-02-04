@@ -1,0 +1,54 @@
+# A project translates into one executable or library.
+project:
+
+  processor:
+    # This project is executed in secure mode.
+    trustzone: off
+
+  # List of preprocessor macros to be defined.
+  define:
+    - STM32_EXTMEMLOADER_MDKARMTARGET
+    - __ARM_FEATURE_CMSE: 3
+
+  # List of miscellaneous settings.
+  setups:
+    - setup: Template project setup
+      for-compiler: AC6
+      misc:
+        - C-CPP:
+          - -fropi
+          - -frwpi
+        - Link:
+          - --entry=main
+
+  # List components to use for your application.
+  # A software component is a re-usable unit that may be configurable.
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: Device:CubeMX
+
+  generators:
+    options:
+    - generator: CubeMX
+      map: ExtMemLoader
+
+  # List executable file formats to be generated.
+  output:
+    type:
+      - elf
+      - hex
+      - map
+
+  # Linker script definition
+  linker:
+    - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/ExtMemLoader/stm32n6xx_extmemloader_mdkarm.sct
+      for-compiler: AC6
+
+  # Post-build commands
+  executes:
+    - execute: Copy_ExtMemLoader_to_root
+      run: ${CMAKE_COMMAND} -E copy $input$ $output$
+      input:
+        - ../out/ExtMemLoader/STM32N657X0HxQ/Debug/ExtMemLoader.axf
+      output:
+        - ../ExtMemLoader.axf

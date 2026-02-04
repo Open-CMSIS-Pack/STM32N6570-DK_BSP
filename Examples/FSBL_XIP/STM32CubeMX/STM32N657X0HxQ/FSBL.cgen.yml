@@ -1,0 +1,75 @@
+generator-import:
+  for-device: STMicroelectronics::STM32N657X0HxQ
+  for-board: STM32N6570-DK
+  define:
+    - USE_HAL_DRIVER
+    - STM32N657xx
+    - USE_FULL_LL_DRIVER
+  add-path:
+    - ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Inc
+    - ./STM32CubeMX/Drivers/CMSIS/Device/ST/STM32N6xx/Include
+    - ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Inc/Legacy
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/boot
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sal
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/nor_sfdp
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/psram
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sdcard
+    - ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/user
+    - ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src
+    - ./STM32CubeMX/FSBL/Inc
+    - ./MX_Device/FSBL
+  groups:
+    - group: CubeMX
+      files:
+        - file: ./STM32CubeMX/FSBL/Src/main.c
+        - file: ./STM32CubeMX/FSBL/Src/extmem_manager.c
+        - file: ./STM32CubeMX/FSBL/Src/stm32n6xx_it.c
+        - file: ./STM32CubeMX/FSBL/Src/stm32n6xx_hal_msp.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/stm32_extmem.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/boot/stm32_boot_xip.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sal/stm32_sal_xspi.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sal/stm32_sal_sd.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/nor_sfdp/stm32_sfdp_data.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/nor_sfdp/stm32_sfdp_driver.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/psram/stm32_psram_driver.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sdcard/stm32_sdcard_driver.c
+        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/user/stm32_user_driver.c
+        # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/memory_wrapper.c
+        # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/systick_management.c
+        # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashDev.c
+        # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashPrg.c
+        # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_device_info.c
+        # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_loader_api.c
+        - file: ./STM32CubeMX/MDK-ARM/startup_stm32n657xx_fsbl.c
+        - file: ./STM32CubeMX/FSBL/Src/system_stm32n6xx_fsbl.c
+    - group: STM32 HAL Driver
+      files:
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_exti.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_adc.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_adc_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_dma.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_dma_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rcc.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rcc_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_gpio.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_pwr.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_pwr_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_cortex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_exti.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_rcc.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_utils.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_i2c.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_i2c_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_mdf.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_sai.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_sai_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_ucpd.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_gpio.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_dma.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_uart.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_uart_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_hcd.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_usb.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_xspi.c

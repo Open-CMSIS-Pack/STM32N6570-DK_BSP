@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package schemaVersion="1.7.54" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.54/schema/PACK.xsd">
+  <name>STM32N6570-DK_BSP</name>
+  <vendor>Keil</vendor>
+  <description overview="Documents/OVERVIEW.md">STMicroelectronics STM32N6 Series STM32N6570-DK Board Support Pack</description>
+  <url>https://www.keil.com/pack/</url>
+  <repository type="git">https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP.git</repository>
+  <license>LICENSES</license>
+  <licenseSets>
+    <licenseSet id="all" default="true" gating="true">
+      <license title="Apache-2.0 License for CMSIS add-ons"                  name="LICENSE-Apache-2.0"   spdx="Apache-2.0"/>
+      <license title="BSD-3-Clause License for STMicroelectronics STM32 HAL" name="LICENSE-BSD-3-Clause" spdx="BSD-3-Clause"/>
+    </licenseSet>
+  </licenseSets>
+
+  <releases>
+    <release version="1.0.0-dev">
+      Active development ...
+      Prepared for new CMSIS-Toolbox CubeMX integration
+      Board description for STM32N6570-DK
+      CMSIS Drivers:
+      - CMSIS-Driver VIO
+      Examples (CMSIS Solution):
+      - Blinky
+      - FSBL
+      - FSBL_LRUN
+      - FSBL_XIP
+    </release>
+  </releases>
+
+  <keywords>
+    <!-- keywords for indexing -->
+    <keyword>ST</keyword>
+    <keyword>Board Support Pack</keyword>
+    <keyword>STM32N6</keyword>
+    <keyword>STM32N6570-DK</keyword>
+  </keywords>
+
+  <requirements>
+    <packages>
+      <package vendor="Keil" name="STM32N6xx_DFP"      version="1.0.0-0"/>
+      <package vendor="ARM"  name="CMSIS"              version="6.0.0-0"/>
+      <package vendor="ARM"  name="CMSIS-Driver_STM32" version="1.3.0-0"/>
+    </packages>
+  </requirements>
+
+  <conditions>
+    <!-- Board Condition -->
+    <condition id="STM32N6570-DK">
+      <description>STMicroelectronics STM32N6570-DK Board</description>
+      <require Bvendor="STMicroelectronics" Bname="STM32N6570-DK"/>
+    </condition>
+
+    <!-- Board Condition + CMSIS Driver GPIO-->
+    <condition id="STM32N6570-DK GPIO">
+      <description>STMicroelectronics STM32N6570-DK Board with CMSIS Driver GPIO</description>
+      <require condition="STM32N6570-DK"/>
+      <require Cclass="CMSIS Driver" Cgroup="GPIO"/>
+    </condition>
+  </conditions>
+
+  <components>
+    <!-- CMSIS VIO Driver component for STM32N6570-DK -->
+    <component Cclass="CMSIS Driver" Cgroup="VIO" Csub="Board" Cversion="1.0.0" Capiversion="1.0.0" condition="STM32N6570-DK GPIO">
+      <description>I/O implementation for STM32N6570-DK</description>
+      <RTE_Components_h>
+        #define RTE_VIO_BOARD
+        #define RTE_VIO_STM32N6570_DK
+      </RTE_Components_h>
+      <files>
+        <file category="source" name="CMSIS/Driver/vio_STM32N6570-DK.c"/>
+      </files>
+    </component>
+  </components>
+
+  <boards>
+    <!-- STM32N6570-DK -->
+    <board vendor="STMicroelectronics" name="STM32N6570-DK" revision="Rev.C"
+           salesContact="https://www.st.com/content/st_com/en/contact-us.html">
+      <description>STM32 Discovery development board with STM32N657X0H3Q MCU</description>
+      <image small="Images/stm32n6570-dk_small.png"
+             large="Images/stm32n6570-dk_large.png"/>
+      <book category="overview"  name="https://www.st.com/en/evaluation-tools/stm32n6570-dk.html" title="STM32N6570-DK Board"/>
+      <book category="overview"  name="https://www.st.com/resource/en/data_brief/stm32n6570-dk.pdf" title="Data Brief"/>
+      <book category="manual"    name="https://www.st.com/resource/en/user_manual/um3300-discovery-kit-with-stm32n657x0-mcu-stmicroelectronics.pdf" title="User Manual"/>
+      <book category="schematic" name="https://www.st.com/resource/en/schematic_pack/mb1939-n6570-c02-schematic.pdf" title="Schematics"/>
+      <book category="other"     name="Documents/README.md" title="Guide"/>
+      <mountedDevice    deviceIndex="0" Dvendor="STMicroelectronics:13" Dname="STM32N657X0HxQ"/>
+      <feature type="ODbg"        n="1"              name="On-board ST-LINK/V3EC"/>
+      <feature type="XTAL"        n="48000000"/>
+      <feature type="PWR"         n="5"              name="USB Powered"/>
+      <feature type="PWR"         n="3"  m="5"       name="External Supply"/>
+      <feature type="RAM"         n="1"              name="4.2 Mbytes of contiguous SRAM"/>
+      <feature type="ROM"         n="1"              name="1-Gbit Octo SPI Flash"/>
+      <feature type="ROM"         n="1"              name="256-Mbit Hexadeca SPI PSRAM"/>
+      <feature type="GLCD"        n="1"  m="800.480" name="5 inch color TFT LCD with capacitive touch screen"/>
+      <feature type="MemCard"     n="1"              name="SDIO interface microSD card"/>
+      <feature type="LED"         n="2"              name="2 color user LEDs"/>
+      <feature type="Button"      n="3"              name="Push-Buttons for Reset, Tamper and User"/>
+      <feature type="USB"         n="1"              name="High-Speed USB with type-C Connector, dual role power (DRP)"/>
+      <feature type="USB"         n="1"              name="High-Speed USB with type-A Connector, host"/>
+      <feature type="ETH"         n="1"              name="1-Gbit Ethernet Port with TSN (time-sensitive networking)"/>
+      <feature type="LineIn"      n="1"              name="Audio CODEC with Stereo Line-In/Out and Speaker/Microphone"/>
+      <feature type="LineOut"     n="1"              name="Audio CODEC with Stereo Line-In/Out and Speaker/Microphone"/>
+      <feature type="MIC"         n="1"              name="ST-MEMS Digital microphone"/>
+      <feature type="ArduinoFF"   n="1"              name="ARDUINO® Uno V3 expansion connectors"/>
+      <feature type="ConnOther"   n="1"              name="STMod+ expansion connectors"/>
+      <feature type="ConnOther"   n="1"              name="LDC module connector"/>
+      <feature type="ConnOther"   n="1"              name="Camera module connector"/>
+      <feature type="ConnOther"   n="1"              name="Microphone daughterboard connector"/>
+      <debugInterface adapter="JTAG/SW" connector="20-pin Cortex debug + ETM Trace (0.05 inch connector)"/>
+      <debugInterface adapter="JTAG/SW" connector="10-pin TAG probe TC2050-IDC-NL"/>
+      <debugInterface adapter="ST-Link" connector="USB"/>
+      <debugProbe connector="USB-C" debugClock="10000000" debugLink="swd" name="ST-Link"/>
+    </board>
+  </boards>
+
+  <examples>
+    <example name="Blinky" folder="Examples/Blinky" doc="README.md">
+      <description>CMSIS-RTOS2 Blinky example with VIO</description>
+      <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="csolution" load="Blinky.csolution.yml"/>
+      </project>
+    </example>
+    <example name="FSBL" folder="Examples/FSBL" doc="README.md">
+      <description>First Stage Bootloader template solution (CubeMX configurable)</description>
+      <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="csolution" load="CubeMX.csolution.yml"/>
+      </project>
+    </example>
+    <example name="FSBL_LRUN" folder="Examples/FSBL_LRUN" doc="README.md">
+      <description>First Stage Bootloader load and run (LRUN) template solution (CubeMX configurable)</description>
+      <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="csolution" load="CubeMX.csolution.yml"/>
+      </project>
+    </example>
+    <example name="FSBL_XIP" folder="Examples/FSBL_XIP" doc="README.md">
+      <description>First Stage Bootloader execute in place (XIP) template solution (CubeMX configurable)</description>
+      <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
+      <project>
+        <environment name="csolution" load="CubeMX.csolution.yml"/>
+      </project>
+    </example>
+  </examples>
+</package>

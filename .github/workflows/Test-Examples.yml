@@ -1,0 +1,122 @@
+name: Test-Examples   # BSP Examples
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: '00 20 * * 6'
+
+jobs:
+  Test-Examples:                     # Install tools, build
+    strategy:
+      matrix:
+        test: [
+          { tool: AC6,  dir: Blinky,     proj: Blinky,  tset: ExtMemLoader,  artifact: Blinky_ExtMemLoader    },
+          { tool: AC6,  dir: Blinky,     proj: Blinky,  tset: FSBL,          artifact: Blinky_FSBL            },
+          { tool: AC6,  dir: FSBL,       proj: CubeMX,  tset: ExtMemLoader,  artifact: FSBL_ExtMemLoader      },
+          { tool: AC6,  dir: FSBL,       proj: CubeMX,  tset: FSBL,          artifact: FSBL_FSBL              },
+          { tool: AC6,  dir: FSBL_LRUN,  proj: CubeMX,  tset: ExtMemLoader,  artifact: FSBL_LRUN_ExtMemLoader },
+          { tool: AC6,  dir: FSBL_LRUN,  proj: CubeMX,  tset: FSBL_Appli,    artifact: FSBL_LRUN_FSBL_Appli   },
+          { tool: AC6,  dir: FSBL_XIP,   proj: CubeMX,  tset: ExtMemLoader,  artifact: FSBL_XIP_ExtMemLoader  },
+          { tool: AC6,  dir: FSBL_XIP,   proj: CubeMX,  tset: FSBL_Appli,    artifact: FSBL_XIP_FSBL_Appli    }
+          ]
+
+      fail-fast: false
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout .ci folder
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .ci
+
+      - name: Install tools
+        uses: ARM-software/cmsis-actions/vcpkg@v1
+        with:
+          config: "./.ci/vcpkg-configuration.json"
+
+      - name: Activate Arm tool license
+        uses: ARM-software/cmsis-actions/armlm@v1
+
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          path: ./BSP
+
+      - name: Checkout STM32N6xx_DFP
+        uses: actions/checkout@v4
+        with:
+          repository: Open-CMSIS-Pack/STM32N6xx_DFP
+          path: ./DFP
+
+      - name: Checkout CMSIS-Driver_STM32
+        uses: actions/checkout@v4
+        with:
+          repository: Open-CMSIS-Pack/CMSIS-Driver_STM32
+          path: ./Drivers
+
+      - name: Initialize CMSIS pack root folder
+        run: |
+          cpackget init https://www.keil.com/pack/index.pidx
+          cpackget update-index
+
+      - name: Add local CMSIS packs
+        run: |
+          cpackget add ./BSP/Keil.STM32N6570-DK_BSP.pdsc
+          cpackget add ./DFP/Keil.STM32N6xx_DFP.pdsc
+          cpackget add ./Drivers/ARM.CMSIS-Driver_STM32.pdsc
+
+      - name: Copy example to CI folder
+        working-directory: ./
+        run: |
+          mkdir -p ./CI/${{ matrix.test.dir }}
+          cp -a ./BSP/Examples/${{ matrix.test.dir }}/. ./CI/${{ matrix.test.dir }}
+          
+      - name: Modify cproject.yml to skip Post-build command
+        if: matrix.test.tset == 'FSBL' || matrix.test.tset == 'FSBL_Appli'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ matrix.test.tset }}" = "FSBL" ]; then
+            DEST="CI/${{ matrix.test.dir }}/FSBL/FSBL.cproject.yml"
+            
+            sed '/^[[:space:]]*executes:/,/^[[:space:]]*$/d' "$DEST" > "${DEST}.tmp"
+            mv "${DEST}.tmp" "$DEST"
+            echo "Modified $DEST"
+            
+          elif [ "${{ matrix.test.tset }}" = "FSBL_Appli" ]; then
+            DEST="CI/${{ matrix.test.dir }}/FSBL/FSBL.cproject.yml"
+            DEST_="CI/${{ matrix.test.dir }}/Appli/Appli.cproject.yml"
+            
+            sed '/^[[:space:]]*executes:/,/^[[:space:]]*$/d' "$DEST" > "${DEST}.tmp"
+            mv "${DEST}.tmp" "$DEST"
+            echo "Modified $DEST"
+
+            sed '/^[[:space:]]*executes:/,/^[[:space:]]*$/d' "$DEST_" > "${DEST_}.tmp"
+            mv "${DEST_}.tmp" "$DEST_"
+            echo "Modified $DEST_"
+            
+          else
+            echo "Nothing to modify for tset=${{ matrix.test.tset }}"
+            exit 0
+          fi
+
+      - name: Build Example
+        working-directory: ./CI/${{ matrix.test.dir }}
+        run: |
+          cbuild ./${{ matrix.test.proj }}.csolution.yml --packs --toolchain ${{ matrix.test.tool }} --rebuild --active STM32N657X0HxQ@${{ matrix.test.tset }}
+
+      - name: Upload Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.test.artifact }}_${{ matrix.test.tool }}
+          path: |
+            ./CI/${{ matrix.test.dir }}/
+            !./CI/${{ matrix.test.dir }}/tmp/
+          retention-days: 1

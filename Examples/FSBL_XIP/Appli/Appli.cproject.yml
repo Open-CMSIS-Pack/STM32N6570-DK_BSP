@@ -1,0 +1,39 @@
+# A project translates into one executable or library.
+project:
+
+  processor:
+    # This project is executed in secure mode.
+    trustzone: secure
+
+  # List components to use for your application.
+  # A software component is a re-usable unit that may be configurable.
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: Device:CubeMX
+
+  generators:
+    options:
+    - generator: CubeMX
+      map: Appli
+
+  # List executable file formats to be generated.
+  output:
+    type:
+      - bin
+      - elf
+      - hex
+      - map
+
+  # Linker script definition
+  linker:
+    - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/Appli/stm32n657xx_ROMxspi2.sct
+      for-compiler: AC6
+
+  # Post-build commands to add header
+  executes:
+    - execute: Generate_trusted_bin
+      run: $ENV{STM32_PRG_PATH}/STM32_SigningTool_CLI.exe -bin $input$ -s -nk -of 0x80000000 -align -t fsbl -o $output$ -hv 2.3
+      input:
+        - $bin()$
+      output:
+        - $OutDir()$/Appli-trusted.bin
