@@ -28,7 +28,7 @@ is available with various real-time operating systems, for example RTX5 or FreeR
 > **Prerequisites:**
 >
 >- **Required Packs:**
->   - [Keil.STM32N6xx_DFP](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP)
+>   - [Keil.STM32N6xx_DFP 1.1.0](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP)
 >   - [Keil.STM32N6570-DK_BSP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP)
 >- **Required CMSIS Tools and Extensions:**
 >   - Arm CMSIS Solution 1.64.2
