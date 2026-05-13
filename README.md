@@ -16,8 +16,9 @@ Directory                   | Description
 :---------------------------|:--------------
 [.ci](./.ci)                | Files that are related to the Continuous Integration (CI) tests of this BSP.
 [.github/workflows](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/.github/workflows)   | [GitHub Actions](#github-actions) scripts described below.
-[CMSIS/Driver](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/CMSIS/Driver)             | Contains a [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) that is configured for the board peripherals.
 [Documents](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Documents)                   | [Usage overview](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Documents/OVERVIEW.md) for examples and board documentation provided by STMicroelectronics.
+[Drivers/BSP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Drivers/BSP)               | Contains STMicroelectronics BSP drivers for this board.
+[Drivers/CMSIS](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/CMSIS/Driver)            | Contains a [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) that is configured for the board peripherals.
 [Examples/Blinky](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/Blinky)       | Blinky example in *csolution project format* using [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) and [CMSIS-Compiler](https://arm-software.github.io/CMSIS-Compiler/main/index.html) for printf I/O retargeting.
 [Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL)           | FSBL example in *csolution project format* that provides the FSBL basic reference template.
 [Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) | FSBL_LRUN example in *csolution project format* that provides the FSBL load and run reference template.
