@@ -169,21 +169,21 @@
       </project>
     </example>
     <example name="FSBL" folder="Examples/FSBL" doc="README.md">
-      <description>First Stage Bootloader template solution (CubeMX configurable)</description>
+      <description>First Stage Bootloader example solution (CubeMX configurable)</description>
       <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
       <project>
         <environment name="csolution" load="CubeMX.csolution.yml"/>
       </project>
     </example>
     <example name="FSBL_LRUN" folder="Examples/FSBL_LRUN" doc="README.md">
-      <description>First Stage Bootloader load and run (LRUN) template solution (CubeMX configurable)</description>
+      <description>First Stage Bootloader with Load and Run (LRUN) example solution (CubeMX configurable)</description>
       <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
       <project>
         <environment name="csolution" load="CubeMX.csolution.yml"/>
       </project>
     </example>
     <example name="FSBL_XIP" folder="Examples/FSBL_XIP" doc="README.md">
-      <description>First Stage Bootloader execute in place (XIP) template solution (CubeMX configurable)</description>
+      <description>First Stage Bootloader with Execute in Place (XIP) example solution (CubeMX configurable)</description>
       <board name="STM32N6570-DK" vendor="STMicroelectronics"/>
       <project>
         <environment name="csolution" load="CubeMX.csolution.yml"/>

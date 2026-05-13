@@ -29,7 +29,7 @@ project:
     - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/FSBL/stm32n657xx_axisram2_fsbl.sct
       for-compiler: AC6
 
-  # Post-build commands to add header
+  # Post-build commands to add header and copy FSBL to root
   executes:
     - execute: Generate_trusted_bin
       run: $ENV{STM32_PRG_PATH}/STM32_SigningTool_CLI.exe -bin $input$ -s -nk -of 0x80000000 -align -t fsbl -o $output$ -hv 2.3
@@ -37,3 +37,15 @@ project:
         - $bin()$
       output:
         - $OutDir()$/FSBL-trusted.bin
+    - execute: Copy_FSBL_hex_to_root
+      run: ${CMAKE_COMMAND} -E copy $input$ $output$
+      input:
+        - ../out/FSBL/STM32N657X0HxQ/Debug/FSBL.hex
+      output:
+        - ../FSBL.hex
+    - execute: Copy_FSBL_axf_to_root
+      run: ${CMAKE_COMMAND} -E copy $input$ $output$
+      input:
+        - ../out/FSBL/STM32N657X0HxQ/Debug/FSBL.axf
+      output:
+        - ../FSBL.axf

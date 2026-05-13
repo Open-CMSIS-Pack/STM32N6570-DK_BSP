@@ -25,15 +25,15 @@ is available with various real-time operating systems, for example RTX5 or FreeR
 
 ## Steps to Build, Load and Debug using the Blinky csolution project
 
-> **Prerequisites:**
+> **Prerequisites**
 >
->- **Required Packs:**
->   - [Keil.STM32N6xx_DFP](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP)
->   - [Keil.STM32N6570-DK_BSP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP)
->- **Required CMSIS Tools and Extensions:**
+>- **Required Packs**
+>   - [Keil.STM32N6xx_DFP 1.2.0](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP) or higher
+>   - [Keil.STM32N6570-DK_BSP 1.1.0](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP) or higher
+>- **Required CMSIS Tools and Extensions**
 >   - Arm CMSIS Solution 1.64.2
 >   - Arm CMSIS Debugger 1.3.0
->- **Required ST tools and Firmware Package:**
+>- **Required ST tools and Firmware Package**
 >   - [STM32CubeMX 6.16.1](https://www.st.com/en/development-tools/stm32cubemx.html)
 >     - [STM32Cube_FW_N6 1.3.0](https://www.st.com/en/embedded-software/stm32cuben6.html)
 >   - [STM32CubeProgrammer 2.21.0](https://www.st.com/en/development-tools/stm32cubeprog.html)
@@ -48,25 +48,28 @@ is available with various real-time operating systems, for example RTX5 or FreeR
 - Continue with select **FSBL** Target Set
 - Ensure **ST-Link@pyOCD** Debug Adapter is selected and **Update launch.json and tasks.json** checkbox is selected and click **Save** then click **Build solution**
   - FSBL project should successfully build into out folder
-  - Set the boot mode configuration in **development mode** (BOOT1 switch position to 1-3) and reset board
-  - To flash STM32N6570-DK board click **Views and More Actions** and click **Load application to target**
-  - Set the boot mode configuration in **flash mode** (BOOT1 switch position to 1-2) and reset board
-  - Configured `LD1_green` (GPIO PO.01) LED should blink (in FSBL/Src/main.c)
+
+### Load application to target
+
+- Set the boot mode configuration in **development mode** (BOOT1 switch position to 1-3) and reset board after each power on cycle
+- To flash STM32N6570-DK board click **Views and More Actions** and click **Load application to target**
+- Set the boot mode configuration in **flash mode** (BOOT1 switch position to 1-2) and reset board
+- Configured `LD1_green` (GPIO PO.01) LED should blink (in FSBL/Src/main.c)
 
 ## Debug in VSCode
 
-- To debug application in:
-  - **FLASH MODE:**
+- To debug application in
+  - **FLASH MODE**
     - Set the boot mode configuration in **flash mode** (BOOT1 switch position to 1-2) and reset board
     > To flash an unprogrammed (virgin) STM32N6570-DK board, ensure that the board is in development mode (BOOT1 switch position to 1-3).
-    - Open .vscode\launch.json file and modify configuration named "STLink@pyOCD (launch)" under **initCommands** and **customResetCommands** commands:
-      - Modify the command name from **tbreak main** to **thbreak main**
+    - Open `.vscode\launch.json` file and modify configuration named "STLink@pyOCD (launch)" under **initCommands** and **customResetCommands**:
+      - Modify the command from **tbreak main** to **thbreak main**
     - Click **Load & Debug application** button and now program should wait in main function to start debug
     - With Continue (F5) button, `LD1_green` (GPIO PO.01) LED should blink in flash mode
 
-  - **DEVELOPMENT MODE:**
+  - **DEVELOPMENT MODE**
     - Set the boot mode configuration in **development mode** (BOOT1 switch position to 1-3) and reset board
-    - Open .vscode\launch.json file and modify configuration named "STLink@pyOCD (launch)"
+    - Open `.vscode\launch.json` file and modify configuration named "STLink@pyOCD (launch)"
       - Comment line
 
       ```jsonc

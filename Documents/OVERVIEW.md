@@ -8,7 +8,7 @@ The **STMicroelectronics STM32N6570-DK Board Support Pack (BSP)**:
 
 ## Content in *csolution format*
 
- - [Examples/Blinky](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/Blinky) shows the basic usage of this board.
- - [Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL) shows the fsbl basic usage of this board.
- - [Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) shows the fsbl lrun usage of this board.
- - [Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP) shows the fsbl xip usage of this board.
+- [Examples/Blinky](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/Blinky) shows the basic usage of this board.
+- [Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL) shows the FSBL usage of this board.
+- [Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) shows the FSBL_LRUN usage of this board.
+- [Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP) shows the FSBL_XIP usage of this board.

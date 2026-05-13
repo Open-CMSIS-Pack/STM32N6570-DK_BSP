@@ -20,9 +20,9 @@ Directory                   | Description
 [Drivers/BSP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Drivers/BSP)               | Contains STMicroelectronics BSP drivers for this board.
 [Drivers/CMSIS](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/CMSIS/Driver)            | Contains a [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) that is configured for the board peripherals.
 [Examples/Blinky](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/Blinky)       | Blinky example in *csolution project format* using [CMSIS-Driver VIO](https://arm-software.github.io/CMSIS_6/latest/Driver/group__vio__interface__gr.html) and [CMSIS-Compiler](https://arm-software.github.io/CMSIS-Compiler/main/index.html) for printf I/O retargeting.
-[Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL)           | FSBL example in *csolution project format* that provides the FSBL basic reference template.
-[Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) | FSBL_LRUN example in *csolution project format* that provides the FSBL load and run reference template.
-[Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP)   | FSBL_XIP example in *csolution project format* that provides the FSBL execute-in-place reference template.
+[Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL)           | FSBL example in *csolution project format* that provides the FSBL basic reference example.
+[Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) | FSBL_LRUN example in *csolution project format* that provides the FSBL load and run reference example.
+[Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP)   | FSBL_XIP example in *csolution project format* that provides the FSBL execute-in-place reference example.
 [Images](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Images)                         | [Pictures](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/Images/stm32n6570-dk_large.png) of the board.
 
 ## Using the development repository

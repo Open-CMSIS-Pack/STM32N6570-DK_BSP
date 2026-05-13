@@ -58,124 +58,176 @@
 
 ## Configuration in VSCode
 
+### *.csolution.yml
+
+- Add `target-set` with `set` and `memory` configuration settings
+
+  ```yaml
+    target-types:
+      - type: STM32N657X0HxQ
+        target-set:
+          - set: ExtMemLoader
+            images:
+              - project-context: ExtMemLoader.Debug
+          - set: FSBL_Appli
+            images:
+              - project-context: FSBL.Debug
+                load: none
+              - project-context: Appli.Debug
+                load: symbols
+              - image: out/FSBL/$Dname$/$BuildType$/FSBL-trusted.bin
+                load-offset: 0x70000000
+                load: image
+              - image: out/Appli/$Dname$/$BuildType$/Appli-trusted.bin
+                load-offset: 0x70100000
+                load: image
+            debugger:
+              name: ST-Link@pyOCD
+              clock: 4000000
+              protocol: swd
+        memory:
+          - name: Ext-Flash
+            access: rx
+            start: 0x70000000
+            size: 0x00100000
+            algorithm: ExtMemLoader.axf
+          - name: Ext-Flash
+            access: rx
+            start: 0x70100000
+            size: 0x00100000
+            algorithm: ExtMemLoader.axf
+        device: STM32N657X0HxQ
+        board: STM32N6570-DK:Rev.C
+  ```
+
 ### FSBL/FSBL.cproject.yml
 
-- #### Add linker script
+- Add linker script
 
-```yaml
-  # Linker script definition
-  linker:
-    - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/FSBL/stm32n657xx_axisram2_fsbl.sct
-      for-compiler: AC6
-```
+  ```yaml
+    # Linker script definition
+    linker:
+      - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/FSBL/stm32n657xx_axisram2_fsbl.sct
+        for-compiler: AC6
+  ```
 
-- #### Add post-build command to add header to the generated binary
+- Add post-build commands to generate binary with header and copy FSBL.hex and FSBL.axf to root
 
-```yaml
-  # Post-build commands to add header
-  executes:
-    - execute: Generate_trusted_bin
-      run: $ENV{STM32_PRG_PATH}/STM32_SigningTool_CLI.exe -bin $input$ -s -nk -of 0x80000000 -align -t fsbl -o $output$ -hv 2.3
-      input:
-        - $bin()$
-      output:
-        - $OutDir()$/FSBL-trusted.bin
-```
+  ```yaml
+    # Post-build commands to generate binary with header and copy FSBL.hex and FSBL.axf to root
+    executes:
+      - execute: Generate_trusted_bin
+        run: $ENV{STM32_PRG_PATH}/STM32_SigningTool_CLI.exe -bin $input$ -s -nk -of 0x80000000 -align -t fsbl -o $output$ -hv 2.3
+        input:
+          - $bin()$
+        output:
+          - $OutDir()$/FSBL-trusted.bin
+      - execute: Copy_FSBL_hex_to_root
+        run: ${CMAKE_COMMAND} -E copy $input$ $output$
+        input:
+          - ../out/FSBL/STM32N657X0HxQ/Debug/FSBL.hex
+        output:
+          - ../FSBL.hex
+      - execute: Copy_FSBL_axf_to_root
+        run: ${CMAKE_COMMAND} -E copy $input$ $output$
+        input:
+          - ../out/FSBL/STM32N657X0HxQ/Debug/FSBL.axf
+        output:
+          - ../FSBL.axf
+  ```
 
-> The OTP configuration for flash source selection is configurable via fuses in BOOTROM_CONFIG_2[8:5], OTP_WORD11 using **STM32CubeProgrammer**. Requires the **default** boot configuration to have sNOR device attached boot. For more information, please check [UM3234](https://www.st.com/resource/en/user_manual/um3234-how-to-proceed-with-boot-rom-on-stm32n6-mcus-stmicroelectronics.pdf).
+  > The OTP configuration for flash source selection is configurable via fuses in BOOTROM_CONFIG_2[8:5], OTP_WORD11 using **STM32CubeProgrammer**. Requires the **default** boot configuration to have sNOR device attached boot. For more information, please check [UM3234](https://www.st.com/resource/en/user_manual/um3234-how-to-proceed-with-boot-rom-on-stm32n6-mcus-stmicroelectronics.pdf).
 
 ### STM32CubeMX/STM32N657X0HxQ/FSBL.cgen.yml
 
-- #### Comment redundant files
+- Comment redundant files
 
-```yaml
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/memory_wrapper.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/systick_management.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashDev.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashPrg.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_device_info.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_loader_api.c
-```
+  ```yaml
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/memory_wrapper.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/systick_management.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashDev.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashPrg.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_device_info.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_loader_api.c
+  ```
 
 ### Appli/Appli.cproject.yml
 
-- #### Add linker script
+- Add linker script
 
-```yaml
-  # Linker script definition
-  linker:
-    - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/Appli/stm32n657xx_ROMxspi2.sct
-      for-compiler: AC6
-```
+  ```yaml
+    # Linker script definition
+    linker:
+      - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/Appli/stm32n657xx_ROMxspi2.sct
+        for-compiler: AC6
+  ```
 
-- #### Add post-build command to add header to the generated binary
+- Add post-build command to generate binary with header
 
-```yaml
-  # Post-build commands to add header
-  executes:
-    - execute: Generate_trusted_bin
-      run: $ENV{STM32_PRG_PATH}/STM32_SigningTool_CLI.exe -bin $input$ -s -nk -of 0x80000000 -align -t fsbl -o $output$ -hv 2.3
-      input:
-        - $bin()$
-      output:
-        - $OutDir()$/Appli-trusted.bin
-```
+  ```yaml
+    # Post-build command to generate binary with header
+    executes:
+      - execute: Generate_trusted_bin
+        run: $ENV{STM32_PRG_PATH}/STM32_SigningTool_CLI.exe -bin $input$ -s -nk -of 0x80000000 -align -t fsbl -o $output$ -hv 2.3
+        input:
+          - $bin()$
+        output:
+          - $OutDir()$/Appli-trusted.bin
+  ```
 
 ### STM32CubeMX/STM32N657X0HxQ/Appli.cgen.yml
 
-- #### Comment following redundant files (temporarily issue with cmsis toolbox extension)
+- Comment following redundant files (temporarily issue with cmsis toolbox extension)
 
-```yaml
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/memory_wrapper.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/systick_management.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashDev.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashPrg.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_device_info.c
-  # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_loader_api.c
-```
+  ```yaml
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/memory_wrapper.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/systick_management.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashDev.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashPrg.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_device_info.c
+    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_loader_api.c
+  ```
 
 ### STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/Appli/Src/main.c
 
-- #### Add code to blink `LD1_green` LED
+- Add code to blink `LD1_green` LED
 
-```c
-    /* USER CODE BEGIN 3 */
-    HAL_GPIO_TogglePin(LD1_green_GPIO_Port, LD1_green_Pin);
-    HAL_Delay(500);
-   }
-    /* USER CODE END 3 */
-```
+  ```c
+      /* USER CODE BEGIN 3 */
+      HAL_GPIO_TogglePin(LD1_green_GPIO_Port, LD1_green_Pin);
+      HAL_Delay(500);
+     }
+      /* USER CODE END 3 */
+  ```
 
 ### ExtMemLoader/ExtMemLoader.cproject.yml
 
-- #### Modify TrustZone mode from secure to "off"
+- Add linker script
 
-- #### Add linker script
+  ```yaml
+    # Linker script definition
+    linker:
+      - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/ExtMemLoader/stm32n6xx_extmemloader_mdkarm.sct
+        for-compiler: AC6
+  ```
 
-```yaml
-  # Linker script definition
-  linker:
-    - script: ../STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/MDK-ARM/ExtMemLoader/stm32n6xx_extmemloader_mdkarm.sct
-      for-compiler: AC6
-```
+- Add post build command to copy ExtMemLoader.axf to root
 
-- #### Add post build commands to move .axf to root
-
-```yaml
-  # Post-build commands
-  executes:
-    - execute: Copy_ExtMemLoader_to_root
-      run: ${CMAKE_COMMAND} -E copy $input$ $output$
-      input:
-        - ../out/ExtMemLoader/STM32N657X0HxQ/Debug/ExtMemLoader.axf
-      output:
-        - ../ExtMemLoader.axf
-```
+  ```yaml
+    # Post-build command to copy ExtMemLoader.axf to root
+    executes:
+      - execute: Copy_ExtMemLoader_to_root
+        run: ${CMAKE_COMMAND} -E copy $input$ $output$
+        input:
+          - ../out/ExtMemLoader/STM32N657X0HxQ/Debug/ExtMemLoader.axf
+        output:
+          - ../ExtMemLoader.axf
+  ```
 
 ### STM32CubeMX/STM32N657X0HxQ/ExtMemLoader.cgen.yml
 
-- #### Comment redundant file
+- Comment redundant file
 
-```yaml
-  # - file: ./STM32CubeMX/MDK-ARM/startup_stm32n657xx_fsbl.c
-```
+  ```yaml
+    # - file: ./STM32CubeMX/MDK-ARM/startup_stm32n657xx.c
+  ```

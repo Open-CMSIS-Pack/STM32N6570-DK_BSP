@@ -6,8 +6,8 @@
 //------ With VS Code: Open Preview for Configuration Wizard -------------------
 
 // <n> Auto-generated using information from packs
-// <i> Device Family Pack (DFP):   Keil::STM32N6xx_DFP@1.1.0
-// <i> Board Support Pack (BSP):   Keil::STM32N6570-DK_BSP@1.0.0
+// <i> Device Family Pack (DFP):   Keil::STM32N6xx_DFP@1.2.0
+// <i> Board Support Pack (BSP):   Keil::STM32N6570-DK_BSP@1.1.0
 
 // <h> ROM Configuration
 // =======================
