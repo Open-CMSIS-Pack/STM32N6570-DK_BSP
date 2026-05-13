@@ -24,6 +24,9 @@ Directory                   | Description
 [Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) | FSBL_LRUN example in *csolution project format* that provides the FSBL load and run reference example.
 [Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP)   | FSBL_XIP example in *csolution project format* that provides the FSBL execute-in-place reference example.
 [Images](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Images)                         | [Pictures](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/Images/stm32n6570-dk_large.png) of the board.
+[Layers/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Layers/FSBL)                    | FSBL layer for using the board with [CMSIS-Toolbox - Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/).
+[Layers/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Layers/FSBL_LRUN)          | FSBL_LRUN layer for using the board with [CMSIS-Toolbox - Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/).
+[Layers/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Layers/FSBL_XIP)            | FSBL_XIP layer for using the board with [CMSIS-Toolbox - Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/).
 
 ## Using the development repository
 

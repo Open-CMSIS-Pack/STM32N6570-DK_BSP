@@ -1,0 +1,5 @@
+loadboard STM32N6570-DK allmodes
+project name STM32CubeMX
+project toolchain "MDK-ARM V5"
+project path "C:\github\ZM\SDS-Examples - Copy\ST\STM32N6570-DK\KeywordSpotting\FSBL_XIP\Board\STM32N6570-DK\FSBL_XIP\CubeMX"
+SetCopyLibrary "copy only"

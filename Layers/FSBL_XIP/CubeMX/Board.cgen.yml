@@ -1,0 +1,48 @@
+generator-import:
+  for-device: STMicroelectronics::STM32N657X0HxQ
+  for-board: STM32N6570-DK
+  define:
+    - USE_HAL_DRIVER
+    - STM32N657xx
+  add-path:
+    - ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Inc
+    - ./STM32CubeMX/Drivers/CMSIS/Device/ST/STM32N6xx/Include
+    - ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Inc/Legacy
+    - ./STM32CubeMX/Appli/Inc
+    - ./STM32CubeMX/Secure_nsclib
+    - ./MX_Device/Appli
+  groups:
+    - group: CubeMX
+      files:
+        - file: ./STM32CubeMX/Appli/Src/main.c
+        - file: ./STM32CubeMX/Appli/Src/stm32n6xx_it.c
+        - file: ./STM32CubeMX/Appli/Src/stm32n6xx_hal_msp.c
+        - file: ./STM32CubeMX/Appli/Src/stm32n6xx_hal_timebase_tim.c
+        - file: ./STM32CubeMX/Appli/Src/secure_nsc.c
+        - file: ./STM32CubeMX/MDK-ARM/startup_stm32n657xx.c
+        - file: ./STM32CubeMX/Appli/Src/system_stm32n6xx_s.c
+    - group: STM32 HAL Driver
+      files:
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_tim.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_tim_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_cortex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_dma.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_dma_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rcc.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rcc_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_gpio.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_pwr.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_pwr_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_exti.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_i2c.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_i2c_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_mdf.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rif.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_sai.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_sai_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_uart.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_uart_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_pcd.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_pcd_ex.c
+        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_usb.c

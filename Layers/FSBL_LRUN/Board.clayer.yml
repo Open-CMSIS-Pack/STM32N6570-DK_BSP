@@ -1,0 +1,64 @@
+layer:
+  type: Board
+  description: FSBL_LRUN STM32N6570-DK board setup
+  for-board: STMicroelectronics::STM32N6570-DK
+  processor:
+    trustzone: secure
+
+  generators:
+    options:
+      - generator: CubeMX
+        path: ./CubeMX
+        name: Board
+        map: Appli
+
+  connections:
+    - connect: STM32N6570-DK Board
+      provides:
+        - CMSIS_USB_Device
+        - CMSIS_VIO
+        - CMSIS_VSTREAM_AUDIO_IN
+        - STDIN
+        - STDOUT
+        - STDERR
+        - Heap: 65536
+
+  define:
+    - CMSIS_target_header: \"STM32N6570-DK.h\"
+    - CMSIS_VSTREAM_AUDIO_IN_MONO: 1
+
+  packs:
+    - pack: Keil::STM32N6xx_DFP@^1.2.0-0
+    - pack: Keil::STM32N6570-DK_BSP@^1.1.0-0
+    - pack: ARM::CMSIS-Driver_STM32@^1.4.0-0
+    - pack: ARM::CMSIS@^6.2.0
+    - pack: ARM::CMSIS-Compiler@^2.0.0
+
+  components:
+    - component: Device:CubeMX
+
+    - component: CMSIS:CORE
+
+    - component: CMSIS Driver:GPIO
+    - component: CMSIS Driver:USART
+    - component: CMSIS Driver:USB Device
+    - component: CMSIS Driver:VIO:Board
+    - component: CMSIS Driver:vStream:AudioIn
+
+    - component: CMSIS-Compiler:CORE
+    - component: CMSIS-Compiler:STDERR:Custom
+    - component: CMSIS-Compiler:STDOUT:Custom
+    - component: CMSIS-Compiler:STDIN:Custom
+
+    - component: Board Support&STM32N6570-DK:Drivers
+
+  groups:
+    - group: Board
+      files:
+        - file: ./README.md
+        - file: ./STM32N6570-DK.h
+        - file: ./retarget_stdio.c
+
+  linker:
+    - script: ./CubeMX/STM32CubeMX/MDK-ARM/Appli/stm32n657xx_LRUN.sct
+      for-compiler: AC6

@@ -33,6 +33,7 @@ PACK_DIRS="
   Documents
   Examples
   Images
+  Layers
 "
 
 # Specify file names to be added to pack base directory
