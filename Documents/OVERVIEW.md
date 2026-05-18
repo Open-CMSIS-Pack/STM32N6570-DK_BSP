@@ -9,10 +9,10 @@ The **STMicroelectronics STM32N6570-DK Board Support Pack (BSP)**:
 ## Content in *csolution format*
 
 - [Examples/Blinky](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/Blinky) shows the basic usage of this board.
-- [Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL) shows the FSBL usage of this board.
-- [Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) shows the FSBL_LRUN usage of this board.
-- [Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP) shows the FSBL_XIP usage of this board.
-- [Layers/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL) for device-agnostic [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/)that implements these API interfaces:
+- [Examples/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL) shows the First Stage Bootloader usage of this board.
+- [Examples/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) shows the First Stage Bootloader load and run (LRUN) usage of this board.
+- [Examples/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP) shows the First Stage Bootloader execute in place (XIP) usage of this board.
+- [Layers/FSBL](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL) for device-agnostic [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/) that implements these API interfaces:
 
 | Provided API Interface        | Description
 |:------------------------------|:------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ The **STMicroelectronics STM32N6570-DK Board Support Pack (BSP)**:
 | STDIN, STDOUT, STDERR         | Standard I/O connected to Virtual COM port on ST-LINK connector (CN14)
 | CMSIS_VSTREAM_AUDIO_IN        | CMSIS-Driver vStream for on-board microphone MIC
 
-- [Layers/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) for device-agnostic [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/)that implements these API interfaces:
+- [Layers/FSBL_LRUN](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_LRUN) for device-agnostic [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/) that implements these API interfaces:
 
 | Provided API Interface        | Description
 |:------------------------------|:------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ The **STMicroelectronics STM32N6570-DK Board Support Pack (BSP)**:
 | STDIN, STDOUT, STDERR         | Standard I/O connected to Virtual COM port on ST-LINK connector (CN14)
 | CMSIS_VSTREAM_AUDIO_IN        | CMSIS-Driver vStream for on-board microphone MIC
 
-- [Layers/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP) for device-agnostic [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/)that implements these API interfaces:
+- [Layers/FSBL_XIP](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL_XIP) for device-agnostic [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/) that implements these API interfaces:
 
 | Provided API Interface        | Description
 |:------------------------------|:------------------------------------------------------------------------------
