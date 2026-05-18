@@ -1,6 +1,6 @@
 # Board: STMicroelectronics [STM32N6570-DK](https://www.st.com/en/evaluation-tools/stm32n6570-dk.html)
 
-## FSBL_XIP Board Layer
+## FSBL_XIP (First Stage Bootloader Execute in Place) Board Layer
 
 Device: **STM32N657X0HxQ**
 
