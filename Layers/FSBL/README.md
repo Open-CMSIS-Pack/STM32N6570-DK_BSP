@@ -42,12 +42,11 @@ Refer to ["Configure STM32 Devices with CubeMX"](https://open-cmsis-pack.github.
 
 > **Prerequisites**
 >
->- **Required ST tools and Firmware Package**
->   - [STM32CubeProgrammer 2.21.0](https://www.st.com/en/development-tools/stm32cubeprog.html)
->     - STM32_SigningTool_CLI: Verify the environment variable `STM32_PRG_PATH` points to the folder that contains `STM32_SigningTool_CLI.exe`
+>- **Required ST tool**
+>     - [STM32CubeProgrammer 2.21.0](https://www.st.com/en/development-tools/stm32cubeprog.html)
+>         - STM32_SigningTool_CLI: Verify the environment variable `STM32_PRG_PATH` points to the folder that contains `STM32_SigningTool_CLI.exe`
 
 FSBL Layer with connections can be used to create [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/).
-
 
 ### Clone and open [FSBL Example](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/tree/main/Examples/FSBL)
 
@@ -56,7 +55,7 @@ FSBL Layer with connections can be used to create [Reference Applications](https
 ### [Create new solution](https://mdk-packs.github.io/vscode-cmsis-solution-docs/create_app.html) in VS Code based on [Reference Applications](https://open-cmsis-pack.github.io/cmsis-toolbox/ReferenceApplications/) with FSBL Layer for STM32N6570-DK board
 
 - Update *.csolution.yml
-  - Ensure `target-set` with `set`,`debugger` and `memory` configuration settings
+    - Ensure `target-set` with `set`,`debugger` and `memory` configuration settings
 
     ```yaml
           target-set:
@@ -82,7 +81,7 @@ FSBL Layer with connections can be used to create [Reference Applications](https
     ```
 
 - Update *.cproject.yml
-  - Ensure support for following output types
+    - Ensure support for following output types
 
     ```yaml
       output:
@@ -93,7 +92,7 @@ FSBL Layer with connections can be used to create [Reference Applications](https
           - map
     ```
 
-  - Add post-build command to generate binary with header
+    - Add post-build command to generate binary with header
 
     ```yaml
       # Post-build command to generate binary with header
@@ -108,55 +107,55 @@ FSBL Layer with connections can be used to create [Reference Applications](https
 
 - Copy the following file from the previous root folder `FSBL Example` project into the current root folder `Reference_Applications` project
 
-  - ExtMemLoader.axf
+    - ExtMemLoader.axf
 
 - Build project
 
 #### Debug in VSCode
 
 - To debug application in
-  - **FLASH MODE**
-    - Set the boot mode configuration in **flash mode** (BOOT1 switch position to 1-2) and reset board
-    > To flash an unprogrammed (virgin) STM32N6570-DK board, ensure that the board is in development mode (BOOT1 switch position to 1-3).
-    - Open `.vscode\launch.json` file and modify configuration named "STLink@pyOCD (launch)" under **initCommands** and **customResetCommands**:
-      - Modify the command from **tbreak main** to **thbreak main**
-    - Click **Load & Debug application** button and now program should wait in main function to start debug
-    - With Continue (F5) button, application should run in flash mode
+    - **FLASH MODE**
+        - Set the boot mode configuration in **flash mode** (BOOT1 switch position to 1-2) and reset board
+          > To flash an unprogrammed (virgin) STM32N6570-DK board, ensure that the board is in development mode (BOOT1 switch position to 1-3).
+        - Open `.vscode\launch.json` file and modify configuration named "STLink@pyOCD (launch)" under **initCommands** and **customResetCommands**:
+            - Modify the command from **tbreak main** to **thbreak main**
+        - Click **Load & Debug application** button and now program should wait in main function to start debug
+        - With Continue (F5) button, application should run in flash mode
 
-  - **DEVELOPMENT MODE**
-    - Set the boot mode configuration in **development mode** (BOOT1 switch position to 1-3) and reset board
-    - Open `.vscode\launch.json` file and modify configuration named "STLink@pyOCD (launch)"
-      - Comment line
+    - **DEVELOPMENT MODE**
+        - Set the boot mode configuration in **development mode** (BOOT1 switch position to 1-3) and reset board
+        - Open `.vscode\launch.json` file and modify configuration named "STLink@pyOCD (launch)"
+            - Comment line
 
-      ```jsonc
-      // "preLaunchTask": "CMSIS Load",
-      ```
+            ```jsonc
+            // "preLaunchTask": "CMSIS Load",
+            ```
 
-      - add commands into initCommands
+            - add commands into initCommands
 
-      ```json
-      "initCommands": [
-          "monitor reset halt",
-          "load out/<project-name>/STM32N657X0HxQ/<build-type>/<project-name>.hex",
-          "set $pc = Reset_Handler",
-          "set $sp = (int) &Image$$ARM_LIB_STACK$$ZI$$Limit",
-          "thbreak main"
-      ```
+            ```json
+            "initCommands": [
+                "monitor reset halt",
+                "load out/<project-name>/STM32N657X0HxQ/<build-type>/<project-name>.hex",
+                "set $pc = Reset_Handler",
+                "set $sp = (int) &Image$$ARM_LIB_STACK$$ZI$$Limit",
+                "thbreak main"
+            ```
 
-      - add commands into customResetCommands
+            - add commands into customResetCommands
 
-      ```json
-      "customResetCommands": [
-          "monitor reset halt",
-          "maintenance flush register-cache",
-          "maintenance flush dcache",
-          "load out/<project-name>/STM32N657X0HxQ/<build-type>/<project-name>.hex",
-          "set $pc = Reset_Handler",
-          "set $sp = (int) &Image$$ARM_LIB_STACK$$ZI$$Limit",
-          "thbreak main",
-          "continue"
-      ```
+            ```json
+            "customResetCommands": [
+                "monitor reset halt",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
+                "load out/<project-name>/STM32N657X0HxQ/<build-type>/<project-name>.hex",
+                "set $pc = Reset_Handler",
+                "set $sp = (int) &Image$$ARM_LIB_STACK$$ZI$$Limit",
+                "thbreak main",
+                "continue"
+            ```
 
-    - Save launch.json
-    - Click **Load & Debug application** button and now program should wait in main function to start debug
-    - With Continue (F5) button, application should run in development mode
+        - Save launch.json
+        - Click **Load & Debug application** button and now program should wait in main function to start debug
+        - With Continue (F5) button, application should run in development mode

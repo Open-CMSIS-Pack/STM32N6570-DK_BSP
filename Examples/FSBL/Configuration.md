@@ -14,29 +14,29 @@
 
 - CORTEX_M55M_FSBL: Enable **CPU ICache** and **CPU DCache**
 - GPIO: Select PO1 pin as **GPIO_output** and configure PO1 configuration:
-  - Pin Context Assignment: **First State Boot Loader**
-  - GPIO output level: Low
-  - Add user label: `LD1_green`
+    - Pin Context Assignment: **First State Boot Loader**
+    - GPIO output level: Low
+    - Add user label: `LD1_green`
 
 #### Connectivity
 
 - SDMMC2: Unselect **First Stage Boot Loader** checkbox to disable this peripheral (to avoid configuration issues)
 - XSPI1: Unselect **First Stage Boot Loader** checkbox to disable this peripheral (to avoid configuration issues with PO1 `LD1_green`)
 - XSPI2: Check that **First Stage Boot Loader** and **External Memory Loader** are selected under Runtime contexts and modify following parameter settings:
-  - Fifo Threshold: **4**
-  - Memory Type: **Macronix**
-  - Memory size: **1GBits**
+    - Fifo Threshold: **4**
+    - Memory Type: **Macronix**
+    - Memory size: **1GBits**
 
 #### Middleware
 
 - EXTMEM_MANAGER: Select **Activate External Memory Manager** checkbox and configure **Memory 1** parameters:
-  - Select the memory driver: **EXTMEM_NOR_SFDP**
-  - Memory Instance: **XSPI2**
-  - Number of memory data lines: **EXTMEM_LINK_CONFIG_8LINES**
+    - Select the memory driver: **EXTMEM_NOR_SFDP**
+    - Memory Instance: **XSPI2**
+    - Number of memory data lines: **EXTMEM_LINK_CONFIG_8LINES**
 
 - EXTMEM_LOADER: Select **Activate External Memory Loader** checkbox and configure following **External Memory Loader** parameters:
-  - Number of sectors: **0x8000** (32768)
-  - Sector size: **0x1000** Bytes (4096)
+    - Number of sectors: **0x8000** (32768)
+    - Sector size: **0x1000** Bytes (4096)
 
 ### Navigate to Clock Configuration
 
