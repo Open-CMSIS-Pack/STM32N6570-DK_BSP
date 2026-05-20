@@ -26,10 +26,11 @@
 #include "cmsis_vstream.h"
 
 // CMSIS Driver instances of Board peripherals
-#define CMSIS_DRIVER_USBD   0           // Driver_USBD0
+#define CMSIS_DRIVER_USBD    0          // Driver_USBD0
+#define CMSIS_DRIVER_USBD_HS 1          // CMSIS Driver USB Device high-speed support
 
 // CMSIS Driver instance for STDIO retarget
-#define RETARGET_STDIO_UART 1
+#define RETARGET_STDIO_UART  1
 
 // CMSIS Drivers
 extern ARM_DRIVER_USART     ARM_Driver_USART_(RETARGET_STDIO_UART);     // ST-LINK
