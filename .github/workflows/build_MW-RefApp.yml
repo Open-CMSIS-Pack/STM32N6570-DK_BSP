@@ -1,0 +1,117 @@
+name: Build MDK-Middleware RefApps
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [workflows]
+  schedule:
+    - cron: '00 20 * * 6'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_BOARD: STM32N6570-DK
+
+    strategy:
+      fail-fast: false
+      matrix:
+        solution: [
+          { name: USB_Device, dir: USB/Device, config: FSBL,      layer_ac6: ./BSP/Layers/FSBL,      artifact: USB_Device_FSBL },
+          { name: USB_Device, dir: USB/Device, config: FSBL_LRUN, layer_ac6: ./BSP/Layers/FSBL_LRUN, artifact: USB_Device_FSBL_LRUN },
+          { name: USB_Device, dir: USB/Device, config: FSBL_XIP,  layer_ac6: ./BSP/Layers/FSBL_XIP,  artifact: USB_Device_FSBL_XIP },
+          { name: Network,    dir: Network,    config: FSBL,      layer_ac6: ./BSP/Layers/FSBL,      artifact: Network_FSBL },
+          { name: Network,    dir: Network,    config: FSBL_LRUN, layer_ac6: ./BSP/Layers/FSBL_LRUN, artifact: Network_FSBL_LRUN },
+          { name: Network,    dir: Network,    config: FSBL_XIP,  layer_ac6: ./BSP/Layers/FSBL_XIP,  artifact: Network_FSBL_XIP }
+        ]
+
+    steps:
+      - name: Checkout .ci folder
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .ci
+
+      - name: Install tools
+        uses: ARM-software/cmsis-actions/vcpkg@v1
+        with:
+          config: "./.ci/vcpkg-configuration.json"
+
+      - name: Activate Arm tool license
+        uses: ARM-software/cmsis-actions/armlm@v1
+
+      - name: Checkout current repository
+        uses: actions/checkout@v7
+        with:
+          path: ./BSP
+
+      - name: Checkout STM32N6xx_DFP
+        uses: actions/checkout@v7
+        with:
+          repository: Open-CMSIS-Pack/STM32N6xx_DFP
+          path: ./DFP
+
+      - name: Checkout MDK-Middleware
+        uses: actions/checkout@v7
+        with:
+          repository: ARM-software/MDK-Middleware
+          path: ./MDK-Middleware
+
+      - name: Checkout CMSIS-Driver_STM32
+        uses: actions/checkout@v7
+        with:
+          repository: Open-CMSIS-Pack/CMSIS-Driver_STM32
+          path: ./Drivers
+
+      - name: Initialize CMSIS pack root folder
+        run: |
+          cpackget init https://www.keil.com/pack/index.pidx
+          cpackget update-index
+
+      - name: Add local CMSIS packs
+        run: |
+          cpackget add ./BSP/Keil.STM32N6570-DK_BSP.pdsc
+          cpackget add ./DFP/Keil.STM32N6xx_DFP.pdsc
+          cpackget add ./MDK-Middleware/Keil.MDK-Middleware.pdsc
+          cpackget add ./Drivers/ARM.CMSIS-Driver_STM32.pdsc
+
+      - name: Copy example structure to CI/MW-RefApps folder
+        run: |
+          mkdir -p "./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}/Board"
+          cp -a ./MDK-Middleware/Examples/. ./CI/MW-RefApps/Examples/
+
+      - name: Replace specific csolution files
+        run: |
+          if [ -e "./.ci/MW-RefApps/Examples/${{ matrix.solution.dir }}/${{ matrix.solution.name }}.csolution.yml" ]
+          then
+            cp -f "./.ci/MW-RefApps/Examples/${{ matrix.solution.dir }}/${{ matrix.solution.name }}.csolution.yml" \
+              "./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}/${{ matrix.solution.name }}.csolution.yml"
+          fi
+
+      - name: Add ${{ matrix.solution.config }} board layer to ${{ matrix.solution.name }} solution
+        run: |
+          sed -i "s|target-types:|&\n    - type: $TARGET_BOARD\n      board: $TARGET_BOARD\n      variables:\n        - Board-Layer: \$SolutionDir()\$/Board/Board.clayer.yml|" \
+            "./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}/${{ matrix.solution.name }}.csolution.yml"
+
+      - name: Copy ${{ matrix.solution.config }} board layer for ${{ matrix.solution.name }}
+        run: |
+          cp -rf "${{ matrix.solution.layer_ac6 }}"/* \
+            "./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}/Board/"
+
+      - name: Build ${{ matrix.solution.name }} (${{ matrix.solution.config }}) with AC6
+        working-directory: ./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}
+        run: |
+          cbuild "./${{ matrix.solution.name }}.csolution.yml" --update-rte --packs \
+            --toolchain AC6 --rebuild
+
+      - name: Upload ${{ matrix.solution.name }} (${{ matrix.solution.config }}) AC6 artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.solution.artifact }}_AC6
+          path: |
+            ./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}/
+            !./CI/MW-RefApps/Examples/${{ matrix.solution.dir }}/tmp/
+          retention-days: 1
