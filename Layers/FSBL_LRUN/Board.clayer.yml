@@ -29,11 +29,11 @@ layer:
     - CMSIS_VSTREAM_AUDIO_IN_MONO: 1
 
   packs:
-    - pack: Keil::STM32N6xx_DFP@^1.2.0-0
-    - pack: Keil::STM32N6570-DK_BSP@^1.1.0-0
-    - pack: ARM::CMSIS-Driver_STM32@^1.4.0-0
+    - pack: Keil::STM32N6xx_DFP@^1.2.1-0
+    - pack: Keil::STM32N6570-DK_BSP@^1.2.0-0
+    - pack: ARM::CMSIS-Driver_STM32@^1.5.0-0
     - pack: ARM::CMSIS-Driver@^2.11.0-0
-    - pack: ARM::CMSIS@^6.2.0
+    - pack: ARM::CMSIS@^6.4.0
     - pack: ARM::CMSIS-Compiler@^2.0.0
 
   components:

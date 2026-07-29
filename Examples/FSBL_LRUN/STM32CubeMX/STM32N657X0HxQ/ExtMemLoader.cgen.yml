@@ -41,12 +41,10 @@ generator-import:
         - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/psram/stm32_psram_driver.c
         - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sdcard/stm32_sdcard_driver.c
         - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/user/stm32_user_driver.c
-        - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/boot/stm32_boot_lrun.c
-        # - file: ./STM32CubeMX/MDK-ARM/startup_stm32n657xx.c
+       # - file: ./STM32CubeMX/MDK-ARM/startup_stm32n657xx.c
         - file: ./STM32CubeMX/ExtMemLoader/Src/system_stm32n6xx_fsbl.c
     - group: STM32 HAL Driver
       files:
-        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_exti.c
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rcc.c
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_rcc_ex.c
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_gpio.c
@@ -57,6 +55,4 @@ generator-import:
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_cortex.c
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal.c
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_exti.c
-        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_rcc.c
-        - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_ll_utils.c
         - file: ./STM32CubeMX/Drivers/STM32N6xx_HAL_Driver/Src/stm32n6xx_hal_xspi.c

@@ -2,6 +2,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-green?label=License)](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/LICENSE-Apache-2.0)
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-green?label=License)](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP/blob/main/LICENSE-BSD-3-Clause)
 [![Examples Build Test](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/STM32N6570-DK_BSP/build_examples.yml?logo=arm&logoColor=0091bd&label=Examples%20Build%20Test)](./.github/workflows/build_examples.yml)
+[![MDK-Middleware Build Test](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/STM32N6570-DK_BSP/build_MW-RefApp.yml?logo=arm&logoColor=0091bd&label=MDK-Middleware%20Build%20Test)](./.ci)
 [![Build pack](https://img.shields.io/github/actions/workflow/status/Open-CMSIS-Pack/STM32N6570-DK_BSP/pack.yml?logo=arm&logoColor=0091bd&label=Build%20pack)](/.github/workflows/pack.yml)
 
 # STM32N6570-DK_BSP
@@ -48,7 +49,8 @@ Run this script locally with:
 The repository uses GitHub Actions to generate the pack and build examples:
 
 - `.github/workflows/pack.yml` based on [Open-CMSIS-Pack/gen-pack-action](https://github.com/Open-CMSIS-Pack/gen-pack-action) generates pack using the [Generate software pack](#generate-software-pack) scripts.
-- `.github/workflows/build_examples.yml` build test of examples.
+- `.github/workflows/build_examples.yml` test build of examples.
+- `.github/workflows/build_MW-RefApp.yml` test build of MDK Middleware Reference Applications.
 
 ## Issues
 
