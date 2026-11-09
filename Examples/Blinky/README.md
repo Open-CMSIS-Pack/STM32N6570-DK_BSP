@@ -28,14 +28,14 @@ is available with various real-time operating systems, for example RTX5 or FreeR
 > **Prerequisites**
 >
 >- **Required Packs**
->     - [Keil.STM32N6xx_DFP 1.2.0](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP) or higher
->     - [Keil.STM32N6570-DK_BSP 1.1.0](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP) or higher
+>     - [Keil.STM32N6xx_DFP 1.2.1](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP) or higher
+>     - [Keil.STM32N6570-DK_BSP 1.2.0](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP) or higher
 >- **Required CMSIS Tools and Extensions**
 >     - Arm CMSIS Solution 1.64.2
 >     - Arm CMSIS Debugger 1.3.0
 >- **Required ST tools and Firmware Package**
->     - [STM32CubeMX 6.16.1](https://www.st.com/en/development-tools/stm32cubemx.html)
->         - [STM32Cube_FW_N6 1.3.0](https://www.st.com/en/embedded-software/stm32cuben6.html)
+>     - [STM32CubeMX 6.18.0](https://www.st.com/en/development-tools/stm32cubemx.html)
+>         - [STM32Cube_FW_N6 1.4.0](https://www.st.com/en/embedded-software/stm32cuben6.html)
 >     - [STM32CubeProgrammer 2.21.0](https://www.st.com/en/development-tools/stm32cubeprog.html)
 >         - STM32_SigningTool_CLI: Verify the environment variable `STM32_PRG_PATH` points to the folder that contains `STM32_SigningTool_CLI.exe`
 

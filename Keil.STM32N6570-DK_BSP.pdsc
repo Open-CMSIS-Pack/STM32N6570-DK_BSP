@@ -16,9 +16,13 @@
   <releases>
     <release version="1.2.0-dev">
       Active development ...
+      Updated to STM32CubeMX v6.18.0 and STM32CubeN6 Firmware Package v1.4.0
+      Examples:
+      - Added dbgconf files
       Layers: 
-      - Added missing define (high-speed support)
+      - Added USB define (high-speed support)
       - Added Ethernet support
+      - Added Audio and Board config files
     </release>
   </releases>
 
@@ -32,7 +36,7 @@
 
   <requirements>
     <packages>
-      <package vendor="Keil" name="STM32N6xx_DFP"      version="1.2.0-0"/>
+      <package vendor="Keil" name="STM32N6xx_DFP"      version="1.2.1-0"/>
       <package vendor="ARM"  name="CMSIS"              version="6.0.0-0"/>
       <package vendor="ARM"  name="CMSIS-Driver_STM32" version="1.4.0-0"/>
     </packages>
@@ -63,7 +67,7 @@
 
   <components>
     <!-- STMicroelectronics BSP/Component Drivers -->
-    <bundle Cbundle="STM32N6570-DK" Cclass="Board Support" Cversion="1.0.0">
+    <bundle Cbundle="STM32N6570-DK" Cclass="Board Support" Cversion="1.0.1">
       <description>STMicroelectronics Board Support for STM32N6570-DK board</description>
       <doc>Drivers/BSP/STM32N6570-DK/STM32N6570-DK_BSP_User_Manual.chm</doc>
       <component Cgroup="Drivers" condition="STM32N6570-DK">

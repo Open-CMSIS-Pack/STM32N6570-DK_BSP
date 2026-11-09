@@ -109,27 +109,6 @@
 
   > The OTP configuration for flash source selection is configurable via fuses in BOOTROM_CONFIG_2[8:5], OTP_WORD11 using **STM32CubeProgrammer**. Requires the **default** boot configuration to have sNOR device attached boot. For more information, please check [UM3234](https://www.st.com/resource/en/user_manual/um3234-how-to-proceed-with-boot-rom-on-stm32n6-mcus-stmicroelectronics.pdf).
 
-### STM32CubeMX/STM32N657X0HxQ/FSBL.cgen.yml
-
-- Comment redundant files
-
-  ```yaml
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/stm32_extmem.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sal/stm32_sal_xspi.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sal/stm32_sal_sd.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/nor_sfdp/stm32_sfdp_data.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/nor_sfdp/stm32_sfdp_driver.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/psram/stm32_psram_driver.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/sdcard/stm32_sdcard_driver.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Manager/user/stm32_user_driver.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/memory_wrapper.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/core/systick_management.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashDev.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/MDK-ARM/FlashPrg.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_device_info.c
-    # - file: ./STM32CubeMX/Middlewares/ST/STM32_ExtMem_Loader/STM32Cube/stm32_loader_api.c
-  ```
-
 ### STM32CubeMX/STM32N657X0HxQ/STM32CubeMX/FSBL/Src/main.c
 
 - Add code to blink `LD1_green` LED
