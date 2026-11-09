@@ -14,15 +14,8 @@
   </licenseSets>
 
   <releases>
-    <release version="1.2.0-dev">
+    <release version="1.2.1-dev">
       Active development ...
-      Updated to STM32CubeMX v6.18.0 and STM32CubeN6 Firmware Package v1.4.0
-      Examples:
-      - Added dbgconf files
-      Layers: 
-      - Added USB define (high-speed support)
-      - Added Ethernet support
-      - Added Audio and Board config files
     </release>
   </releases>
 
