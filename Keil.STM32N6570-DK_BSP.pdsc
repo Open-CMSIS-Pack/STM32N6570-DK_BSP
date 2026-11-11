@@ -14,11 +14,8 @@
   </licenseSets>
 
   <releases>
-    <release version="1.2.1-dev">
+    <release version="1.2.2-dev">
       Active development ...
-      Updated documentation
-      Examples:
-      - Added start and size address values to the memory sections
     </release>
   </releases>
 
