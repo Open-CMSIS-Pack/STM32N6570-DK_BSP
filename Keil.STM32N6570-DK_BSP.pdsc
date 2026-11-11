@@ -16,6 +16,9 @@
   <releases>
     <release version="1.2.1-dev">
       Active development ...
+      Updated documentation
+      Examples:
+      - Added start and size address values to the memory sections
     </release>
   </releases>
 
@@ -30,7 +33,7 @@
   <requirements>
     <packages>
       <package vendor="Keil" name="STM32N6xx_DFP"      version="1.2.1-0"/>
-      <package vendor="ARM"  name="CMSIS"              version="6.0.0-0"/>
+      <package vendor="ARM"  name="CMSIS"              version="6.4.0-0"/>
       <package vendor="ARM"  name="CMSIS-Driver_STM32" version="1.4.0-0"/>
     </packages>
   </requirements>

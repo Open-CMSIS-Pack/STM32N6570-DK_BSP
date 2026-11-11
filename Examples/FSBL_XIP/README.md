@@ -17,8 +17,8 @@ Once the application runs, the `LD1_green` LED (GPIO PO.01) blink in an infinite
 > **Prerequisites**
 >
 >- **Required Packs**
->     - [Keil.STM32N6xx_DFP 1.2.1](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP) or higher
->     - [Keil.STM32N6570-DK_BSP 1.2.0](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP) or higher
+>     - [Keil.STM32N6xx_DFP 1.2.2](https://github.com/Open-CMSIS-Pack/STM32N6xx_DFP) or higher
+>     - [Keil.STM32N6570-DK_BSP 1.2.1](https://github.com/Open-CMSIS-Pack/STM32N6570-DK_BSP) or higher
 >- **Required CMSIS Tools and Extensions**
 >     - Arm CMSIS Solution 1.64.2
 >     - Arm CMSIS Debugger 1.3.0
