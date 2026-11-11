@@ -17,9 +17,9 @@ solution:
 
   # List the packs that define the device and/or board.
   packs:
-    - pack: Keil::STM32N6xx_DFP@^1.2.1-0
-    - pack: Keil::STM32N6570-DK_BSP@^1.2.0-0
-    - pack: ARM::CMSIS@^6.0.0
+    - pack: Keil::STM32N6xx_DFP@^1.2.2-0
+    - pack: Keil::STM32N6570-DK_BSP@^1.2.1-0
+    - pack: ARM::CMSIS@^6.4.0
 
   # List different hardware targets that are used to deploy the solution.
   target-types:
@@ -42,10 +42,12 @@ solution:
       device: STM32N657X0HxQ
       board: STM32N6570-DK:Rev.C
       memory:
-        - name: Ext-Flash
+        - name: Ext-Flash-FSBL
           access: rx
           start: 0x70000000
           size: 0x100000
+          ram-start: 0x34180400
+          ram-size: 0x0003FC00
           algorithm: ExtMemLoader.axf
 
   # List of different build configurations.
